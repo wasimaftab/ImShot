@@ -1,0 +1,60 @@
+VERSION 0.4.1 (2013-08-8)
+
+- Corrected a bug on the manyNAs() function which was not working when the second argument as an integer, as it should.
+- The function SMOTE() was changed to remove its dependency on the target variable being the last column. Now it works as expected also if the target column is not the last column.
+- Small changes in function variants() to correct a bug introduced since version 0.3.1 of the package.
+
+VERSION 0.4.0 (2013-06-27)
+
+- Functions implementing work flows that were introduced in versions 0.3.0 and 0.3.1, were eliminated to avoid incompatibilities with the code in the book, which should be the aim of this package. In this context, all the new functionality introduced in branch 0.3 is now removed, and will be included in a new package specifically devoted to the experimental comparison of predictive models that does not need to be backward compatible with the code in the book.
+- Functions slidingWindowTest() and growingWindowTest() were re-introduced into the package.
+- Functions timeseriesWF() and standardWF() were removed.
+- experimentalComparison function now accepts further arguments that are passed on to the lower level functions (e.g. crossvalidation, holdOut, etc.)
+
+VERSION 0.3.1 (2013-03-20)
+
+- Function variants as a new parameter (as.is) that accepts a vector of parameter names that are untouchable. This is useful for parameters that accept as values vectors, and that we do not want the function to interprete these values of different trials of the parameter.
+- Added a new slot to classes cvSettings, hldSettings, bootSettings and mcSettings. This new slot, named dataSplits, allows for the user to provide the data splits to use on each repetition of an experimental comparison instead of relying on the internal random data split generation (that is still the default).
+- Added a new function (timeseriesWF) that unifies the concepts of functions slideRegrWF, growRegrWF, tsRegrWF, slideClassWF, growClassWF and tsClassWF, which are now defunct.
+- Added a new function (standardWF)  that unifies the concepts of functions classWF and regrWF, which are now defunct.
+- Added a new function (ts.eval) that provides a series of evaluation metrics for time series forecasting models.
+
+VERSION 0.3.0 (2013-01-15)
+
+- Fixed problem with stratification in holdOut and crossValidation functions, occurying particularly on some regression problems, due to some empty buckets
+- Modified function regr.eval adding a new evaluation metric (MAPE - mean average percentage error), and also changing slightly the behaviour of the function when using the default parameter settings, namely, if the user uses the defaults in terms of metrics it will only try to compute the normalized metrics if the user supplies the train Y values.
+- Added a new function (class.eval) calculating a few standard evaluation metrics for classification tasks
+- Added a new function (classWF) that serves as a generic workflow function for classification predictive tasks, to be used with the experimental comparisons framework
+- Added a new function (regrWF) that serves as a generic workflow function for regression predictive tasks, to be used with the experimental comparisons framework
+- Small change in the output of leave one out cross validation (mostly cosmetic stuff)
+- Functions slidingWindowTesting() and growingWindowTesting() had serious errors and were removed. Similar functionalities can now be achieved through the new functions slideRegrWF(), growRegrWF(), slideClassWF() and growClassWF().
+- Slight cosmetic changes to the show methods of classes dataset and task.
+
+VERSION 0.2.3 (2012-03-20)
+
+- Fixed warnings in checking on Windows versions of R 2.15.0
+
+
+VERSION 0.2.2 (2012-02-23)
+
+- Fixed bug in function knnImputation(). Thanks to Pedro Coelho for spotting the bug.
+- Fixed warnings in checking the package on R 2.15.0 due to imports
+
+
+VERSION 0.2.1 (2011-04-14)
+
+- Fixed  bug on function dist.to.knn() that was affecting the lofactor() function on some situations.
+
+VERSION 0.2.0 (2011-03-15)
+
+- Added lofactor() function that implements the LOF algorithm by Breunig and colleagues (2000). This function is strongly based on the code previously available in package dprep by Acuna and colleagues (2009), which was removed from CRAN.
+
+- Fixed minor bug on manyNAs() when no row satisfied the constraints satisfied by the user. In those situations the function was generating an empty index vector which could lead to undesirable side-effects, while now it generates a warning indicating an empty index.
+
+- Modified the subset method for compExp objects. The subset method for these objects now allows for the specification of subsets of the learners, datasets and statistics through a regular expression for easier subseting on larger experimental comparisons.
+
+- Added the utility function dsNames() to obtain the names of the data sets involved in an experimental comparison.
+
+- Added the utility function learnerNames() to obtain the names of the learners involved in an experimental comparison.
+
+- Added the utility function statNames() to obtain the names of the evaluation statistics involved in an experimental comparison.
