@@ -82,7 +82,7 @@ not_inst_bioc <- bioc$not_inst
 
 if (bioc_flag && cran_flag) {
     ## Installing ImShot (local package)
-    list.of.packages <- c("DMwR", "imputation", "ImShot")
+    list.of.packages <- c("DMwR", "TimeProjection", "imputation", "ImShot")
     new.packages <-
         list.of.packages[!(list.of.packages %in% installed.packages()[, "Package"])]
     if (length(new.packages)) {
@@ -92,7 +92,7 @@ if (bioc_flag && cran_flag) {
         devtools::install_local(normalizePath(
             here::here(
                 my_path,
-                'ImShot_R_Package/ImShot.package.v1.2.0.zip'
+                'ImShot_R_Package/ImShot.package.v1.2.2.zip'
             ),
             winslash = '/'
         ))
@@ -102,10 +102,19 @@ if (bioc_flag && cran_flag) {
         devtools::install_local(normalizePath(
             here::here(
                 my_path,
-                'Install_Locally/DMwR_0.4.1.tar.gz'
+                'Install_Locally/TimeProjection_0.2.0.tar.gz'
             ),
             winslash = '/'
         ))
+        
+        devtools::install_local(normalizePath(
+          here::here(
+            my_path,
+            'Install_Locally/DMwR_0.4.1.tar.gz'
+          ),
+          winslash = '/'
+        ))
+        
         # devtools::install_github('wasimaftab/ImShot/Required_packages_local/imputation')
         devtools::install_local(normalizePath(
             here::here(
