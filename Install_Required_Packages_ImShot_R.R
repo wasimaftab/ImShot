@@ -89,16 +89,28 @@ if (bioc_flag && cran_flag) {
         ## Getting the path of this script
         my_path <-
             dirname(rstudioapi::getSourceEditorContext()$path)
-        devtools::install_local(normalizePath(
+        
+        ## Install ImShot R package
+        if (Sys.info()["sysname"] == "Darwin"){
+          print("Installing ImShot on macOS using tar file")
+          devtools::install_local(normalizePath(
             here::here(
-                my_path,
-                'ImShot_R_Package/ImShot.package.v1.2.2.zip'
+              my_path,
+              'ImShot_R_Package/ImShot.package.v1.2.2.tar.gz'
             ),
             winslash = '/'
-        ))
-        
-        ## Install required local packages
-        # devtools::install_github('wasimaftab/ImShot/Required_packages_local/DMwR')
+          ))
+        } else {
+          devtools::install_local(normalizePath(
+            here::here(
+              my_path,
+              'ImShot_R_Package/ImShot.package.v1.2.2.zip'
+            ),
+            winslash = '/'
+          ))
+        }
+
+        ## Install other required local packages
         devtools::install_local(normalizePath(
             here::here(
                 my_path,
@@ -115,7 +127,6 @@ if (bioc_flag && cran_flag) {
           winslash = '/'
         ))
         
-        # devtools::install_github('wasimaftab/ImShot/Required_packages_local/imputation')
         devtools::install_local(normalizePath(
             here::here(
                 my_path,
