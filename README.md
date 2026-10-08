@@ -2,7 +2,13 @@
 
 ## Installation (updated 2026)
 
-The ImShot R package (version 1.2.2) is unchanged; only the installation script has been updated so that it works with current R setups.
+The installation script installs ImShot **version 1.2.3** (`ImShot_R_Package/ImShot.package.v1.2.3.tar.gz`). An older installed ImShot is replaced automatically.
+
+**Changes in 1.2.3** (compared with the 2022 release 1.2.2):
+- The treatment and control names entered in `two_grp_limma()` are now checked. An empty, numeric or overlapping name, or a name that would select all intensity columns, is rejected and asked again, and the selected columns are printed. Previously, an empty answer (for example, a blank line sent to the console together with the code) silently selected all intensity columns.
+- No other code was changed. For valid inputs, results are identical to version 1.2.2.
+
+The 2022 package files (`ImShot.package.v1.2.2.tar.gz` and `.zip`), the datasets and the sample results are kept unchanged.
 
 1. Download or clone this repository (if you download the ZIP archive, extract it and rename the folder `ImShot`).
 2. Open `Install_Required_Packages_ImShot_R.R` in RStudio and press **Source**, or run it from the R console:
@@ -34,6 +40,8 @@ For information on how to run ImShot refer the following document (its installat
 
 https://github.com/wasimaftab/ImShot/blob/master/Documentation/Software%20_Documentation_GItHub.pdf
 
-The original 2022 state of the repository is available at commit [`b6bcd2d`](https://github.com/wasimaftab/ImShot/tree/b6bcd2d74e185796a48a11e4ff226d2b0106d1fd).
+Earlier states of the repository:
+- the original 2022 release (ImShot 1.2.2): commit [`b6bcd2d`](https://github.com/wasimaftab/ImShot/tree/b6bcd2d74e185796a48a11e4ff226d2b0106d1fd)
+- ImShot 1.2.2 with the first updated installer: tag [`v1.2.2-installer-2026`](https://github.com/wasimaftab/ImShot/tree/v1.2.2-installer-2026)
 
 ![Graph_Abs](https://user-images.githubusercontent.com/29901809/152519060-4e57abe8-8ea1-4f98-a9e6-b57255028cbd.png)

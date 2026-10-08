@@ -1,4 +1,4 @@
-## Installs ImShot 1.2.2 and every R package it needs.
+## Installs ImShot 1.2.3 and every R package it needs.
 ##
 ## Works on Windows, macOS and Linux with R >= 4.0. Run it in one of these ways:
 ##   * RStudio: open this file and press "Source"
@@ -220,8 +220,11 @@ list.of.local.packages <-
         TimeProjection = "Install_Locally/TimeProjection_0.2.0.tar.gz",
         imputation = "Install_Locally/imputation_2.0.1.tar.gz",
         DMwR = "Install_Locally/DMwR_0.4.1.tar.gz",
-        ImShot = "ImShot_R_Package/ImShot.package.v1.2.2.tar.gz"
+        ImShot = "ImShot_R_Package/ImShot.package.v1.2.3.tar.gz"
     )
+
+## ImShot version installed by this script; an older installed ImShot is replaced
+imshot_version <- "1.2.3"
 
 ## ---------------------------------------------------------------------------
 ## 4. Install (runs in a fresh R process that sees only the ImShot library)
@@ -282,8 +285,12 @@ run_installation <- function() {
         install_cran_and_bio_packages()
     }
 
+    imshot_outdated <- function() {
+        !length(not_installed("ImShot")) &&
+            utils::packageVersion("ImShot") < imshot_version
+    }
     for (pkg in names(list.of.local.packages)) {
-        if (length(not_installed(pkg))) {
+        if (length(not_installed(pkg)) || (pkg == "ImShot" && imshot_outdated())) {
             install.packages(file.path(imshot_dir, list.of.local.packages[[pkg]]),
                              repos = NULL, type = "source")
         }
@@ -294,6 +301,9 @@ run_installation <- function() {
     not_inst_cran <- not_installed(c("BiocManager", list.of.cran.packages))
     not_inst_bioc <- not_installed(list.of.bio.packages)
     not_inst_local <- not_installed(names(list.of.local.packages))
+    if (imshot_outdated()) {
+        not_inst_local <- c(not_inst_local, paste("ImShot", imshot_version))
+    }
 
     if (length(not_inst_cran)) {
         print('Following CRAN packages are not installed')
